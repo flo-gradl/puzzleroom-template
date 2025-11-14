@@ -34,4 +34,5 @@ public interface Field {
      * @return True if the movement is possible, false otherwise
      */
     boolean leaveField(Direction direction);
+
 }
