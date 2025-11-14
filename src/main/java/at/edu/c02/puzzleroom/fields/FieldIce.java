@@ -23,8 +23,8 @@ public class FieldIce extends BaseField {
 
         boolean success = next.enterField(direction);
 
-        if (success) {
-            return true;
+        if (!success) {
+            gameBoard.getPlayer().walkStep();;
         }
 
         return true;

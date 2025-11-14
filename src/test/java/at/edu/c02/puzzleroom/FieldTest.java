@@ -115,4 +115,51 @@ public class FieldTest {
         assertEquals(2, player.getStepCount());
 
     }
+
+    @Test
+    public void IceField() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+
+        new CommandLoad(new String[]{"src/test/resources/IceFiled.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+
+        boolean success = player.moveUp();
+        assertTrue(success);
+
+        assertEquals(1, player.getStepCount());
+
+        // Moving left should not be possible, since there is a wall field
+        success = player.moveRight();
+        assertTrue(success);
+
+        assertEquals(2, player.getStepCount());
+
+        success = player.moveRight();
+        assertTrue(success);
+
+        assertEquals(3, player.getStepCount());
+
+    }
+    @Test
+    public void IceFieldNegative() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+
+        new CommandLoad(new String[]{"src/test/resources/IceFiled.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+
+        boolean success = player.moveUp();
+        assertTrue(success);
+
+        assertEquals(1, player.getStepCount());
+
+        success = player.moveUp();
+        assertFalse(success);
+
+        assertEquals(1, player.getStepCount());
+
+    }
+
+
 }
