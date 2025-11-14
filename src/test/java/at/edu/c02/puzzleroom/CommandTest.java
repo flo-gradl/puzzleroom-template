@@ -40,4 +40,36 @@ public class CommandTest {
         // This should throw a PuzzleRoomInvalidArgumentsException
         new CommandMove(new String[]{"invalid"}).execute(gameBoard);
     }
+
+    @Test
+    public void moveFastPositiveTest() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+        new CommandLoad(new String[]{"src/test/resources/simple.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+        //u,r,r,d sollte zum Ziel führen
+        new CommandFastMove(new String[]{"u,r,r,d"}).execute(gameBoard);
+
+        // Player should now be at 4 step and at column 3 (because they moved right twice) and row 1
+        assertEquals(4, player.getStepCount());
+        assertEquals(1, player.getRow());
+        assertEquals(3, player.getCol());
+    }
+
+    @Test(expected = PuzzleRoomInvalidMoveException.class)
+    public void moveFastNegativTest() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+        new CommandLoad(new String[]{"src/test/resources/simple.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+        //u,r,r,d sollte zum Ziel führen
+        new CommandFastMove(new String[]{"u,r,r,u"}).execute(gameBoard);
+
+        // Player should now be at 3 step (4th step is not possible) and at column 3 (because they moved right twice)
+        assertEquals(3, player.getStepCount());
+        assertEquals(2, player.getRow());
+        assertEquals(3, player.getCol());
+    }
+
+
 }
