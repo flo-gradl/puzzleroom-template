@@ -17,7 +17,6 @@ public class FieldIce extends BaseField {
 
     public boolean enterField(Direction direction) {
 
-        gameBoard.getPlayer().walkStep();
         setPlayerPositionToField();
 
         Field next = getNextInDirection(direction);
