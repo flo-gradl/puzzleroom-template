@@ -75,4 +75,44 @@ public class FieldTest {
         // Game should be finished after moving right twice
         assertTrue(gameBoard.isFinished());
     }
+
+    @Test
+    public void onewayField() throws Exception {
+        GameBoard gameBoard = new GameBoardImpl();
+        // Finish is reached when moving right, up (only up is allowed here), right
+        new CommandLoad(new String[]{"src/test/resources/onewayField.maze"}).execute(gameBoard);
+        Player player = gameBoard.getPlayer();
+
+        // Player should start at 0 steps
+        assertEquals(0, player.getStepCount());
+
+        // Moving left should not be possible, since there is a wall field
+        boolean success = player.moveLeft();
+        assertFalse(success);
+
+        // Player should still be at 0 steps
+        assertEquals(0, player.getStepCount());
+
+        // Moving right should be possible
+        success = player.moveRight();
+        assertTrue(success);
+
+        // Player should be at 1 steps
+        assertEquals(1, player.getStepCount());
+
+        // Moving right once more should not be possible/allowed because it is a oneway field
+        success = player.moveRight();
+        assertFalse(success);
+
+        // Player should still be at 1 steps
+        assertEquals(1, player.getStepCount());
+
+        // Moving right once more should not be possible/allowed because it is a oneway field
+        success = player.moveUp();
+        assertTrue(success);
+
+        // Player should be at 2 steps
+        assertEquals(2, player.getStepCount());
+
+    }
 }
