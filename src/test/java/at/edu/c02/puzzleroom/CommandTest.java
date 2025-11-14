@@ -45,7 +45,7 @@ public class CommandTest {
     @Test
     public void moveFastPositiveTest() throws Exception {
         GameBoard gameBoard = new GameBoardImpl();
-        new CommandLoad(new String[]{"src/test/resources/startfield.maze"}).execute(gameBoard);
+        new CommandLoad(new String[]{"src/test/resources/startField.maze"}).execute(gameBoard);
         Player player = gameBoard.getPlayer();
 
         //u,r,r,d sollte zum Ziel führen
@@ -60,7 +60,7 @@ public class CommandTest {
     @Test(expected = PuzzleRoomInvalidMoveException.class)
     public void moveFastNegativTest() throws Exception {
         GameBoard gameBoard = new GameBoardImpl();
-        new CommandLoad(new String[]{"src/test/resources/startfield.maze"}).execute(gameBoard);
+        new CommandLoad(new String[]{"src/test/resources/startField.maze"}).execute(gameBoard);
         Player player = gameBoard.getPlayer();
 
         //u,r,r,d sollte zum Ziel führen
